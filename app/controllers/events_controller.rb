@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(user_params)
+    @event = Event.new(event_params)
     @event.creator_id = current_user.id
 
     if @event.save
@@ -26,7 +26,7 @@ class EventsController < ApplicationController
 
   private
 
-  def user_params
+  def event_params
     params.require(:event).permit(:date, :place)
   end
 

@@ -1,18 +1,13 @@
 class EventAttendeesController < ApplicationController
-  def new
-    @event_attendee = EventAttendee.new
-  end
-
   def create
-    @event_attendee = EventAttendee.new
-    @event_attendee.attendee_id = current_user.id
-    @event_attendee.attended_event_id = params[:id]
+    @event_attendee = EventAttendee.new(attended_event_id: event.id, attendee_id: current_user.id)
 
     if @event_attendee.save
-      redirect_to index
+      flash[:notice] = "Invitation sent!"
     else
-      render :new, status: :unprocessable_entity
+      flash[:alert] = "Error!"
     end
+    redirect_to index
   end
 
   # private

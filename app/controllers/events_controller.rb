@@ -24,14 +24,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def past
-    @event = Event.where("date < Time.now")
-  end
-
-  def upcoming
-    @event = Event.where("date > Time.now")
-  end
-
   private
 
   def event_params

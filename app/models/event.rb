@@ -6,4 +6,15 @@ class Event < ApplicationRecord
 
   validates :place, presence: true
   validates :date, presence: true
-end
+
+
+  def self.past
+    self.where(date < Time.now)
+  end
+
+  def self.upcoming
+    self.where(self.date > Time.now)
+  end
+end 
+
+# Continue from here, date is not being recognized so I need to figure that out.

@@ -3,8 +3,16 @@
   <li><%= p event.place %></li>
 <% end %>
 
-
-<h3>Attending Events</h3>
+<h3>Future Events</h3>
 <% @user.attended_events.each do |event| %>
-  <li><%= p event.place %></li>
+  <% if event.date > Time.now %>
+    <li><%= p event.place %></li>
+  <% end %>
+<% end %>
+
+<h3>Past Events</h3>
+<% @user.attended_events.each do |event| %>
+  <% if event.date < Time.now %>
+    <li><%= p event.place %></li>
+  <% end %>
 <% end %>

@@ -15,7 +15,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event = Event.new
     @event.creator_id = current_user.id
 
     if @event.save
@@ -23,6 +22,14 @@ class EventsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def past
+    @event = Event.where("date < Time.now")
+  end
+
+  def upcoming
+    @event = Event.where("date > Time.now")
   end
 
   private

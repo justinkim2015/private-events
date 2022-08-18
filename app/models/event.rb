@@ -4,6 +4,6 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_attendees
   # Optional: true makes rails not check for creators existance
 
-  # validates :place, presence: true
-  # validates :date, presence: true
+  validates :place, presence: true
+  validates :date, presence: true
 end

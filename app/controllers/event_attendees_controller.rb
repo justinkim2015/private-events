@@ -1,7 +1,7 @@
 class EventAttendeesController < ApplicationController
   def create
-    # @event_attendee = EventAttendee.new(event_attendees_params)
-    @event_attendee = EventAttendee.new
+    @event_attendee = EventAttendee.new(event_attendees_params)
+    # @event_attendee = EventAttendee.new
 
     if @event_attendee.save
       redirect_to events_path
@@ -10,7 +10,7 @@ class EventAttendeesController < ApplicationController
     end
   end
 
-  # private
+  private
 
   def event_attendees_params
     params.require(:event_attendee).permit(:attended_event_id, :attendee_id)

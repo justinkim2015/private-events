@@ -9,12 +9,14 @@ class Event < ApplicationRecord
 
 
   def self.past
-    self.where(date < Time.now)
+    self.where(self < Time.now)
   end
 
   def self.upcoming
-    self.where(self.date > Time.now)
+    self.where(:date > Time.now)
   end
 end 
 
+# I probably have to use the ? here to pass in the events
+# specific times
 # Continue from here, date is not being recognized so I need to figure that out.

@@ -1,3 +1,10 @@
+<h3>Created Events</h3>
 <% @user.created_events.each do |event| %>
+  <li><%= p event.place %></li>
+<% end %>
+
+
+<h3>Attending Events</h3>
+<% @user.attended_events.each do |event| %>
   <li><%= p event.place %></li>
 <% end %>

@@ -1,9 +1,23 @@
 <h1>Events!</h1>
-
-<% @events.each do |event| %>
-  <li><%= p event.place %></li>
+<%= link_to "New Event", new_event_path %>
+<% if user_signed_in? %>
+  <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "Sign in", new_user_session_path %>
 <% end %>
 
-<% @events.each do |event| %>
-  <li><%= p event.place %></li>
-<% end %>
+<h3>Upcoming</h3>
+<ul>
+  <% @events.upcoming.each do |event| %>
+    <li><%= p event.place %></li>
+    <li><%= p event.date %></li> <br>
+  <% end %>
+</ul>
+
+<h3>Past</h3>
+<ul>
+  <% @events.past.each do |event| %>
+    <li><%= p event.place %></li>
+    <li><%= p event.date %></li> <br>
+  <% end %>
+</ul>

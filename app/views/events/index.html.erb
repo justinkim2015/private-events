@@ -11,15 +11,13 @@
 <h3>Upcoming</h3>
 <ul>
   <% @events.upcoming.each do |event| %>
-    <li><%= p event.place %></li>
-    <li><%= p event.date %></li> <br>
+    <li><%= link_to "#{event.place}", event_path(event.id)%> -- <%= p event.date %></li>
   <% end %>
 </ul>
 
 <h3>Past</h3>
 <ul>
   <% @events.past.each do |event| %>
-    <li><%= p event.place %></li>
-    <li><%= p event.date %></li> <br>
+    <li><%= link_to "#{event.place}", event_path(event.id)%> -- <%= p event.date %></li>
   <% end %>
 </ul>

@@ -13,4 +13,10 @@
 </ul>
 
 <%= button_to "Attend", event_attendees_path(event_attendee: {attended_event_id: @event.id, attendee_id: current_user.id}) %>
-<%= button_to "Delete", event_path(@event), method: :delete %>
+<%= button_to "Unattend", event_attendee_path(@event), method: :delete %>
+<% if current_user.id == @event.creator.id %>
+  <%= button_to "Delete", event_path(@event), method: :delete %>
+  <%= button_to "Edit", edit_event_path(@event), method: :get %>
+<% end %>
+
+<%= link_to "Back", root_path %>

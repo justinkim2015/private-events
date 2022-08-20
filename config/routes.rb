@@ -4,8 +4,4 @@ Rails.application.routes.draw do
   root "events#index"
 
   resources :events, :users, :event_attendees
-  
-  # post "/event_attendees/new", to: "event_attendees#create"
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

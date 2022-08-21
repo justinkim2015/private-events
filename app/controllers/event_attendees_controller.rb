@@ -11,7 +11,7 @@ class EventAttendeesController < ApplicationController
     @event_attendee = EventAttendee.new(event_attendees_params)
 
     if @event_attendee.save
-      redirect_to events_path
+      redirect_to event_path(Event.find(params[:id]))
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class EventAttendeesController < ApplicationController
     @event_attendee = EventAttendee.find_by(attendee_id: "#{current_user.id}", attended_event_id: "#{event.id}")
     @event_attendee.destroy
 
-    redirect_to root_path
+    redirect_to event_path(event)
   end
 
   private

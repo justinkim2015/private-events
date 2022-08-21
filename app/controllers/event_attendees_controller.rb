@@ -1,4 +1,6 @@
 class EventAttendeesController < ApplicationController
+  before_action :require_login
+  
   def show
     @event_attendee = EventAttendee.find(params[:id])
   end

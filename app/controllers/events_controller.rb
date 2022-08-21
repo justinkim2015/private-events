@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :require_login, only: [:new, :create]
+  before_action :require_login, except: [:index]
 
   def index
     @events = Event.all
@@ -18,8 +18,10 @@ class EventsController < ApplicationController
     @event.creator_id = current_user.id
 
     if @event.save
+      flash[:notice] = 'Successfully created!'
       redirect_to @event
     else
+      flash.now[:alert] = "Oh no! Something went wrong!"
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,8 +34,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update(event_params)
+      flash[:notice] = 'Successfully updated!'
       redirect_to @event
     else
+      flash.now[:alert] = "Oh no! Something went wrong!"
       render :edit, status: :unprocessable_entity
     end
   end
@@ -42,6 +46,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
 
+    flash[:notice] = 'Successfully deleted!'
     redirect_to root_path, status: :see_other
   end
 
@@ -49,9 +54,5 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:date, :place)
-  end
-
-  def require_login
-    redirect_to new_user_session_path unless user_signed_in?
   end
 end

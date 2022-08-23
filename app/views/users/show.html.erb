@@ -1,20 +1,41 @@
-<h3>Created Events</h3>
-<% @user.created_events.each do |event| %>
-  <li><%= p event.place %></li>
-<% end %>
+<%= render "shared/navbar" %>
 
-<h3>Future Events</h3>
-<% @user.attended_events.each do |event| %>
-  <% if event.date > Time.now %>
-    <li><%= p event.place %></li>
-  <% end %>
-<% end %>
+<div class="columns m-4">
+  <div class="column has-text-centered">
+    <div class="box mt-6">
+      <h3 class="is-size-4 mb-2">Created Events:</h3>
+      <ul>
+        <% @user.created_events.each do |event| %>
+          <li><%= link_to "#{event.place}", event_path(event.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="column has-text-centered">
+    <div class="box mt-6">
+      <h3 class="is-size-4 mb-2">Future Events:</h3>
+      <% @user.attended_events.each do |event| %>
+        <ul>
+          <% if event.date > Time.now %>
+          <li><%= link_to "#{event.place}", event_path(event.id) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="column has-text-centered">
+    <div class="box mt-6">
+      <h3 class="is-size-4 mb-2">Past Events:</h3>
+      <% @user.attended_events.each do |event| %>
+        <ul>
+          <% if event.date < Time.now %>
+          <li><%= link_to "#{event.place}", event_path(event.id) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 
-<h3>Past Events</h3>
-<% @user.attended_events.each do |event| %>
-  <% if event.date < Time.now %>
-    <li><%= p event.place %></li>
-  <% end %>
-<% end %>
-
-<%= link_to "Back", events_path %>
+</div>

@@ -17,4 +17,8 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where("date > ?", Time.now) }
   scope :past, -> { where("date < ?", Time.now) }
+
+  def self.pretty_date(event)
+    p "#{event.date.month}-#{event.date.day}-#{event.date.year}"
+  end
 end

@@ -1,13 +1,11 @@
+<%= render "shared/navbar" %>
+
 <%= render "shared/flash" %>
 
-<h1>Edit Event</h1>
-
-<%= form_with model: @event do |form| %>
-  <%= form.label :place, "Location" %>
-  <%= form.text_field :place %> <br>
-
-  <%= form.label :date, "Time" %>
-  <%= form.datetime_local_field :date %> <br>
+<div class="columns is-centered">
+  <div class="column is-3">
+    <h1 class="title m-5 mt-6">Edit Event:</h1>
   
-  <%= form.submit "Update Event" %>
-<% end %>
+    <%= render "shared/form" %>
+  </div>
+</div>

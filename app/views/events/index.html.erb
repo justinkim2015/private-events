@@ -9,7 +9,8 @@
       <ul>
         <% @events.upcoming.each do |event| %>
           <div class="card">
-            <li class="is-size-5"><%= link_to "#{event.place}", event_path(event.id)%></li>
+            <li class="is-size-5"><%= link_to "#{event.title}", event_path(event.id)%></li>
+            <li><%= event.body %></li>
             <li>Date: <%= @events.pretty_date(event) %></li>
           </div>
         <% end %>
@@ -21,7 +22,7 @@
       <ul>
         <% @events.past.each do |event| %>
           <div class="card">
-            <li class="is-size-5"><%= link_to "#{event.place}", event_path(event.id)%></li>
+            <li class="is-size-5"><%= link_to "#{event.title}", event_path(event.id)%></li>
             <li>Date: <%= @events.pretty_date(event) %></li>
           </div>
         <% end %>

@@ -10,7 +10,7 @@
       <div class="navbar-item"><%= link_to "Profile", user_path(current_user.id) %></div>
     <% else %>
       <div class="navbar-item"><%= link_to "Sign in", new_user_session_path %></div>
-      <div class="navbar-item"><%= link_to "Profile", new_user_session_path %></div>
+      <div class="navbar-item"><%= link_to "Sign up", new_user_registration_path %></div>
     <% end %>
   </div>
 </nav>

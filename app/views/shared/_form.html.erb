@@ -1,5 +1,10 @@
 <%= form_with model: @event do |form| %>
   <div class="field box m-5">
+    <%= form.label :title, "Title:", class: "label" %>
+    <div class="control">
+      <%= form.text_field :title, class: "input" %>
+    </div>
+
     <%= form.label :place, "Location:", class: "label" %>
     <div class="control">
       <%= form.text_field :place, class: "input" %>
@@ -8,6 +13,11 @@
     <%= form.label :date, "Time:", class: "label mt-2" %>
     <div class="control">
       <%= form.datetime_local_field :date, class: "input" %>
+    </div>
+
+    <%= form.label :body, "Description:", class: "label mt-2" %>
+    <div class="control">
+      <%= form.text_field :body, class: "textarea" %>
     </div>
     
     <%= form.submit "Submit", class: "button mt-5 is-light" %>

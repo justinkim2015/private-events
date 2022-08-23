@@ -1,7 +1,16 @@
-<div class="notification">
-  <% flash.each do |type, msg| %>
-    <div>
-      <%= msg %>
+<% flash.each do |type, msg| %>
+  <% if type == "notice" %>
+    <div class="notification is-primary">
+      <div>
+        <%= msg %>
+      </div>
+    </div>
+  <% else %>
+    <div class="notification is-danger">
+      <div>
+        <%= msg %>
+        <%= p type %>
+      </div>
     </div>
   <% end %>
-</div>
+<% end %>

@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   
   root "events#index"
 
-  resources :events, :users, :event_attendees
+  resources :events, :users, :event_attendees, :invites
 end

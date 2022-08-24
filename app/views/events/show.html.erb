@@ -4,13 +4,14 @@
 
 <div class="container box mt-6">
   <div class="columns">
-    <div class="column has-text-centered">
-      <h2 class="is-size-4">Details:</h2>
+    <div class="column">
+      <h2 class="is-size-4 has-text-centered">Details:</h2>
       <ul>
-        <div class="container mt-2">
+        <div class="container m-6">
           <li><%= "Location:  #{@event.place}" %></li>
           <li><%= "Date:  #{@event.date}" %></li>
-          <li>Host: <%= link_to "#{@event.creator.email}", user_path(@event.creator.id)%> </li>
+          <li>Host: <%= link_to "#{@event.creator.name}", user_path(@event.creator.id)%> </li>
+          <li class="pt-2 pb-2 mt-4"><%= "Details: #{@event.body}" %></li>
         </div>
       </ul>
     </div>
@@ -20,7 +21,7 @@
       <ul>
         <div class="container mt-2">
           <% @event.attendees.each do |person| %>
-            <li><%= link_to "#{person.email}", user_path(person.id) %></li>
+            <li><%= link_to "#{person.name}", user_path(person.id) %></li>
           <% end %>
         </div>
       </ul>
@@ -29,7 +30,7 @@
     <div class="column is-1">
       <div class="container mt-3">
         <% if @event.attendee_ids.include?(current_user.id) %>
-          <%= button_to "Unattend", event_attendee_path(@event), class: "button is-light is-small", method: :delete%>
+          <%= button_to "Unattend", event_attendee_path(@event), class: "button is-light is-small is-rounded", method: :delete%>
         <% else %>
           <%= button_to "Attend", event_attendees_path(event_attendee: {attended_event_id: @event.id, attendee_id: current_user.id}), class: 'button is-light is-rounded is-small mt-1' %>
         <% end %>

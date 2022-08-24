@@ -2,7 +2,9 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :event_attendees, foreign_key: :attended_event_id
   has_many :attendees, through: :event_attendees
-  # Optional: true makes rails not check for creators existance
+
+  has_many :invites, foreign_key: :invited_event_id
+  has_many :invitees, through: :invites
 
   validates :place, presence: true
   validates :date, presence: true

@@ -16,6 +16,7 @@ class InvitesController < ApplicationController
 
     flash[:notice] = 'Uninvited!'
     redirect_to :back
+    # also testing the above to see if it works.
   end
 
   def accept

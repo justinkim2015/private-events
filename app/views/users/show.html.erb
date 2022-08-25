@@ -45,11 +45,13 @@
         <ul>
           <li>
             <div class="is-flex">
-              <%= link_to invite.title, event_path(event.id) %>--
-              <%= button_to "Accept", invite_path(1000), method: :post %>
+              <%= link_to event.title, event_path(event.id) %> --
+              <%= button_to "Accept", 
+              invite_path(invite: {invitee_id: @user.id, invited_event_id: event.id, invite_id: Invite.where("invitee_id = ?", @user.id).and(Invite.where("invited_event_id = ?", event.id)).ids[0]}), 
+              method: :post %>
               <%= button_to "Decline", 
-              invite_path(event.id), method: :delete %>
-              <%# This above path is linking to the event id, I need to find the Invite id %>
+              invite_path(Invite.where("invitee_id = ?", @user.id).and(Invite.where("invited_event_id = ?", event.id)).ids[0]), 
+              method: :delete %>
             </div>
           </li>
         </ul>
@@ -57,3 +59,6 @@
     </div>
   </div>
 </div>
+
+
+# Invite.where("invitee_id = ?", @user.id).and(Invite.where("invited_event_id = ?", event.id)).ids[0]

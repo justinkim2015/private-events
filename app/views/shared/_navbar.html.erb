@@ -1,16 +1,29 @@
 <nav class="navbar is-light">
   <div class="navbar-start">
-    <h1 class="navbar-item is-size-1 ml-3">Events!</h1>
+    <h1 class="navbar-item title ml-5"><%= link_to "Private Events", root_path, class: "has-text-dark" %></h1>
   </div>
-  <div class="navbar-end mr-3">
-    <div class="navbar-item"><%= link_to "Home", root_path %></div>
-    <div class="navbar-item"><%= link_to "New Event", new_event_path %></div>
+  <div class="navbar-end mr-5">
     <% if user_signed_in? %>
-      <div class="navbar-item "><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %></div>
-      <div class="navbar-item"><%= link_to "Profile", user_path(current_user.id) %></div>
+      <div class="navbar-item"><%= link_to "New Event", new_event_path,class: "has-text-dark" %></div>
+      <div class="navbar-item "><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "has-text-dark" %></div>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Profile
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+          <%= link_to "View", user_path(current_user.id), class: "has-text-dark ml-3" %>
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item"><%= link_to "Edit", edit_user_registration_path(current_user.id), class: "has-text-dark ml-3" %></a>
+        </div>
+      </div>
+
     <% else %>
-      <div class="navbar-item"><%= link_to "Sign in", new_user_session_path %></div>
-      <div class="navbar-item"><%= link_to "Sign up", new_user_registration_path %></div>
+      <div class="navbar-item"><%= link_to "Sign in", new_user_session_path, class: "has-text-dark" %></div>
+      <div class="navbar-item"><%= link_to "Sign up", new_user_registration_path, class: "has-text-dark" %></div>
     <% end %>
   </div>
 </nav>

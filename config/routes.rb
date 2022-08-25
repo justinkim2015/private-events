@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root "events#index"
 
   resources :events, :users, :event_attendees, :invites
+
+  post '/invites/:id', to: 'invites#accept'
 end

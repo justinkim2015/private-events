@@ -39,13 +39,9 @@
     </div>
 
     <div class="column is-1 ml">
-
       <div class="container mt-3">
-        <% if @event.attendee_ids.include?(current_user.id) %>
-          <%= button_to "Unattend", event_attendee_path(@event), class: "button is-light is-small is-rounded", method: :delete%>
-        <% else %>
-          <%= button_to "Attend", event_attendees_path(event_attendee: {attended_event_id: @event.id, attendee_id: current_user.id}), class: 'button is-light is-rounded is-small mt-1' %>
-        <% end %>
+
+
 
       <% if current_user == @event.creator %>
         <div class="dropdown is-hoverable mt-2 is-right">
@@ -55,14 +51,31 @@
           <div class="dropdown-menu">
             <div class="dropdown-content">
               <% User.all.each do |user| %>
-                <div class="dropdown-item">
-                  <%= link_to user.name, invites_path(invite: {invitee_id: user.id, invited_event_id: @event.id}), method: :post %>
-                </div>
+                <% if @event.invitees.include?(user) %>
+                  <div class="dropdown-item">
+                    <%= button_to "Uninvite #{user.name}", 
+                        invite_path(Invite.where("invitee_id = ?", user.id).and(Invite.where("invited_event_id = ?", @event.id)).ids[0]),
+                        class: "button is-danger is-small", method: :delete %>
+                  </div>
+                <% elsif !@event.invitees.include?(user) && !@event.attendees.include?(user) %>
+                  <div class="dropdown-item">
+                    <%= button_to user.name, invites_path(invite: {invitee_id: user.id, invited_event_id: @event.id}), class: "button is-light is-small" %>
+                  </div>
+                <% end %>
               <% end %>
             </div>
           </div>
         </div>
+      <% else %>
+        <% if @event.creator != current_user %>
+          <% if @event.attendee_ids.include?(current_user.id) %>
+            <%= button_to "Unattend", event_attendee_path(@event), class: "button is-danger is-small is-rounded", method: :delete%>
+          <% else %>
+            <%= button_to "Attend", event_attendees_path(event_attendee: {attended_event_id: @event.id, attendee_id: current_user.id}), class: 'button is-light is-rounded is-small mt-1' %>
+          <% end %>
+        <% end %>
       <% end %>
+      
 
       </div>
     </div>
@@ -76,6 +89,4 @@
   <% end %>
 </div>
 
-<%#= button_to "Invite", invites_path(invite: {invitee_id: User.where("name = ?", "Foobar").ids[0], invited_event_id: @event.id}) %>
-<%# invitee_id: User.where("name = ?", "Foobar").ids[0] this returns a relation which can't call .id so I called .ids then took the first array element with [0] %>
 

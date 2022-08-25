@@ -38,4 +38,22 @@
     </div>
   </div>
 
+  <div class="column is-2">
+    <div class="box mt-6">
+      <h3 class="is-size-4 mb-2">Invites:</h3>
+      <% @user.invited_event.each do |event| %>
+        <ul>
+          <li>
+            <div class="is-flex">
+              <%= link_to invite.title, event_path(event.id) %>--
+              <%= button_to "Accept", invite_path(1000), method: :post %>
+              <%= button_to "Decline", 
+              invite_path(event.id), method: :delete %>
+              <%# This above path is linking to the event id, I need to find the Invite id %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 </div>

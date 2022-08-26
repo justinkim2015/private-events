@@ -11,11 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_24_023418) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "event_attendees", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "attendee_id"
-    t.integer "attended_event_id"
+    t.bigint "attendee_id"
+    t.bigint "attended_event_id"
     t.index ["attended_event_id"], name: "index_event_attendees_on_attended_event_id"
     t.index ["attendee_id"], name: "index_event_attendees_on_attendee_id"
   end
@@ -25,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_023418) do
     t.string "place"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "creator_id"
+    t.bigint "creator_id"
     t.text "body"
     t.string "title"
     t.index ["creator_id"], name: "index_events_on_creator_id"
@@ -34,8 +37,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_023418) do
   create_table "invites", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "invitee_id"
-    t.integer "invited_event_id"
+    t.bigint "invitee_id"
+    t.bigint "invited_event_id"
     t.index ["invited_event_id"], name: "index_invites_on_invited_event_id"
     t.index ["invitee_id"], name: "index_invites_on_invitee_id"
   end

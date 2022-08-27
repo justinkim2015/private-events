@@ -9,7 +9,7 @@
       <ul>
         <div class="container m-6">
           <li><%= "Location:  #{@event.place}" %></li>
-          <li><%= "Date:  #{@event.date}" %></li>
+          <li><%= "Date:  #{@event.pretty_date}" %></li>
           <li>Host: <%= link_to "#{@event.creator.name}", user_path(@event.creator.id)%> </li>
           <li class="pt-2 pb-2 mt-4"><%= "Details: #{@event.body}" %></li>
         </div>
@@ -54,7 +54,8 @@
                 <% if @event.invitees.include?(user) %>
                   <div class="dropdown-item">
                     <%= button_to "Uninvite #{user.name}", 
-                        invite_path(Invite.where("invitee_id = ?", user.id).and(Invite.where("invited_event_id = ?", @event.id)).ids[0]),
+                        invite_path(@invite.find_user(user.id)),
+                        # ^^^ this will return an array 
                         class: "button is-danger is-small", method: :delete %>
                   </div>
                 <% elsif !@event.invitees.include?(user) && !@event.attendees.include?(user) %>

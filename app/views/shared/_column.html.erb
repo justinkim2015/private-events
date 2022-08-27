@@ -1,0 +1,18 @@
+<% events.each do |event| %>
+  <div class="card mb-6">
+    <div class="card-header">
+      <div class="card-header-title">
+        <%= "#{event.title}: #{event.pretty_date}" %>
+      </div>
+    </div>
+    <div class="card-content">
+      <li><%= event.body %></li>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-item"><%= link_to "View", event_path(event.id) %></div>
+      <% if event.creator == current_user %>
+        <div class="card-footer-item"><%= link_to "Edit", edit_event_path(event.id) %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

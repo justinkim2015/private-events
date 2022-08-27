@@ -20,7 +20,16 @@ class Event < ApplicationRecord
   scope :upcoming, -> { where("date > ?", Time.now) }
   scope :past, -> { where("date < ?", Time.now) }
 
-  def self.pretty_date(event)
-    p "#{event.date.month}-#{event.date.day}-#{event.date.year}"
+  def pretty_date
+    "#{date.month}-#{date.day}-#{date.year}"
+  end
+
+  def find_user(invite_array)
+    invite_array.each do |invite|
+      if invite.invitee_id == user.id
+        user
+        break
+      end
+    end
   end
 end

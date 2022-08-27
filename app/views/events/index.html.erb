@@ -7,48 +7,14 @@
     <div class="column is-half has-text-centered mt-6 mb-6">
       <div class="is-size-1 mb-4">Upcoming:</div>
       <ul>
-        <% @events.upcoming.each do |event| %>
-          <div class="card mb-6">
-            <div class="card-header">
-              <div class="card-header-title">
-                <%= "#{event.title}: #{@events.pretty_date(event)}" %>
-              </div>
-            </div>
-            <div class="card-content">
-              <li><%= event.body %></li>
-            </div>
-            <div class="card-footer">
-              <div class="card-footer-item"><%= link_to "View", event_path(event.id) %></div>
-              <% if event.creator == current_user %>
-                <div class="card-footer-item"><%= link_to "Edit", edit_event_path(event.id) %></div>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        <%= render "shared/column", :events => @events.upcoming %>
       </ul>
     </div>
   
     <div class="column is-half has-text-centered mt-6 mb-6">
       <div class="is-size-1 mb-4">Past:</div>
       <ul>
-        <% @events.past.each do |event| %>
-          <div class="card mb-6">
-            <div class="card-header">
-              <div class="card-header-title">
-                <%= "#{event.title}: #{@events.pretty_date(event)}" %>
-              </div>
-            </div>
-            <div class="card-content">
-              <li><%= event.body %></li>
-            </div>
-            <div class="card-footer">
-              <div class="card-footer-item"><%= link_to "View", event_path(event.id) %></div>
-              <% if event.creator == current_user %>
-                <div class="card-footer-item"><%= link_to "Edit", edit_event_path(event.id) %></div>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        <%= render "shared/column", :events => @events.past %>
       </ul>
     </div>
   </div>

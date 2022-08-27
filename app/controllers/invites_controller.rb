@@ -11,8 +11,8 @@ class InvitesController < ApplicationController
   end
 
   def destroy
-    @invite = Invite.find(params[:id])
-    @invite.destroy
+    @invite = Invite.where("invited_event_id = ?", params[:event_id]).and(Invite.where("invitee_id = ?", params[:user_id]))
+    @invite.destroy_all
 
     flash[:alert] = 'Invite deleted!'
     redirect_back(fallback_location: root_path)

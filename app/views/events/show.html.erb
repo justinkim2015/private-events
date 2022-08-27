@@ -54,8 +54,7 @@
                 <% if @event.invitees.include?(user) %>
                   <div class="dropdown-item">
                     <%= button_to "Uninvite #{user.name}", 
-                        invite_path(@invite.find_user(user.id)),
-                        # ^^^ this will return an array 
+                        invite_path(event_id: @event.id, user_id: user.id ),
                         class: "button is-danger is-small", method: :delete %>
                   </div>
                 <% elsif !@event.invitees.include?(user) && !@event.attendees.include?(user) %>

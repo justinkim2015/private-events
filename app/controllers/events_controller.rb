@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @invite = Invite.where("invited_event_id = ?", @event.id)
+    @invites = Invite.where("invited_event_id = ?", @event.id)
   end
 
   def new
@@ -17,6 +17,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.creator_id = current_user.id
+
+    # @event = current_user.attending_events.build(event_params)
 
     if @event.save
       flash[:notice] = 'Successfully created!'
